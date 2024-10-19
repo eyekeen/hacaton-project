@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\FileTemplateController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\DeanCheck;
 use App\Http\Middleware\DepartmentCheck;
 use App\Http\Middleware\StudentCheck;
+use App\Http\Middleware\MethodologistCheck;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -23,15 +23,16 @@ Route::get('/dean/dashboard', function () {
     return view('dean.dashboard');
 })->middleware(['auth', 'verified', DeanCheck::class])->name('dean.dashboard');
 
+Route::get('/methodologist/dashboard', function () {
+    return view('methodologist.dashboard');
+})->middleware(['auth', 'verified', MethodologistCheck::class])->name('methodologist.dashboard');
+
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-Route::get('/file', [FileTemplateController::class, 'index']);
-Route::get('/file/one', [FileTemplateController::class, 'show']);
-Route::get('/file/store', [FileTemplateController::class, 'store']);
-Route::get('/file/delete', [FileTemplateController::class, 'delete']);
 
 require __DIR__.'/auth.php';

@@ -4,10 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FileTemplate extends Model
+class Status extends Model
 {
     protected $fillable = [
-        'uri',
-        'role_id'
+
     ];
 }

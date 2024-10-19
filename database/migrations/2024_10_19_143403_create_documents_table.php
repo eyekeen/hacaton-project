@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('file_templates', function (Blueprint $table) {
+        Schema::create('documents', function (Blueprint $table) {
             $table->id();
-            $table->string('uri', 255);
-            $table->unsignedBigInteger('role_id');
-
-            $table->foreign('role_id')->references('id')->on('users');
-
+            $table->string('document_name');
+            $table->string('uri');
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('file_templates');
+        Schema::dropIfExists('documents');
     }
 };

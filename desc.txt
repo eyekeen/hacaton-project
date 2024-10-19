@@ -17,3 +17,20 @@ roles:
 4. what i need for submission
 
 5. dashboard (optional)
+
+
+submission of applications
+
+-----------------------
+documents
+id
+document_name
+uri
+-----------------------
+petiions(заявки)
+id
+document_id
+user_id
+data of sent
+status
+------------------------

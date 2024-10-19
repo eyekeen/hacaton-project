@@ -14,31 +14,54 @@
             </div>
         </div>
     </div>
-
-    <div class="dark:text-white relative flex flex-col w-full h-full">
-        <table class="table-auto w-full text-left min-w-max border">
-            <thead class="border">
-                <tr>
-                    <th class="border">#</th>
-                    <th class="border">s name</th>
-                    <th class="border">date of publish</th>
-                    <th class="border">status</th>
-                </tr>
-            </thead>
-            <tbody class="border">
-                <tr>
-                    <td class="border">1</td>
-                    <td class="border">стипендия</td>
-                    <td class="border">19.10.2024</td>
-                    <td class="border">pending</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="flex justify-center min-h-screen bg-gray-900">
+        <div class="w-full max-w-xl bg-gray-800 rounded-lg shadow-md p-8 border border-gray-700">
+            <table class="min-w-full text-white">
+                <thead class="bg-gray-700">
+                    <tr>
+                        <th scope="col" class="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider border border-gray-500">Номер заявки</th>
+                        <th scope="col" class="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider border border-gray-500">Заявка</th>
+                        <th scope="col" class="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider border border-gray-500">Дата отправки</th>
+                        <th scope="col" class="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider border border-gray-500">Статус</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-gray-800">
+                    <tr class="hover:bg-gray-700 transition duration-300 ease-in-out">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium border border-gray-500">1</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm border border-gray-500">
+                           <a href="#">Повышенная стипендия</a>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm border border-gray-500">19.10.2024</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm border border-gray-500">В процессе</td>
+                    </tr>
+                    <tr class="hover:bg-gray-700 transition duration-300 ease-in-out">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium border border-gray-500">1</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm border border-gray-500">
+                           <a href="#">Повышенная стипендия</a>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm border border-gray-500">19.10.2024</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm border border-gray-500">В процессе</td>
+                    </tr>
+                    <tr class="hover:bg-gray-700 transition duration-300 ease-in-out">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium border border-gray-500">1</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm border border-gray-500">
+                           <a href="#">Повышенная стипендия</a>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm border border-gray-500">19.10.2024</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm border border-gray-500">В процессе</td>
+                    </tr>
+                    <tr class="hover:bg-gray-700 transition duration-300 ease-in-out">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium border border-gray-500">1</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm border border-gray-500">
+                           <a href="#">Повышенная стипендия</a>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm border border-gray-500">19.10.2024</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm border border-gray-500">В процессе</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-
-    <button class="text-white mt-4">
-        Отправить заявку
-    </button>
 
 
 </x-app-layout>
