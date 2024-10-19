@@ -5,28 +5,38 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('student.mypetitions') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
-                    </a>
+                    @if(Auth::user()->role === 'student')
+                        <a href="{{ route('student.mypetitions') }}">
+                            <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                        </a>
+                    @elseif (Auth::user()->role === 'methodologist')
+                        <a href="{{ route('methodologist.sentpetitions') }}">
+                            <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                        </a>
+                    @elseif (Auth::user()->role === 'department')
+                        <a href="{{ route('department.sentpetitions') }}">
+                            <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                        </a>
+                    @endif
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     @if(Auth::user()->role === 'student')
-                        <x-nav-link :href="route('student.mypetitions')" :active="request()->routeIs('student.mypetitions')">
-                            Мои заявки
-                        </x-nav-link>
-                        <x-nav-link :href="route('student.sendpetition')" :active="request()->routeIs('student.sendpetition')">
-                            Отправить заявку
-                        </x-nav-link>
+                    <x-nav-link :href="route('student.mypetitions')" :active="request()->routeIs('student.mypetitions')">
+                        Мои заявки
+                    </x-nav-link>
+                    <x-nav-link :href="route('student.sendpetition')" :active="request()->routeIs('student.sendpetition')">
+                        Отправить заявку
+                    </x-nav-link>
                     @elseif (Auth::user()->role === 'methodologist')
-                        <x-nav-link :href="route('methodologist.sentpetitions')" :active="request()->routeIs('methodologist.sentpetitions')">
-                            Полученные заявки
-                        </x-nav-link>
+                    <x-nav-link :href="route('methodologist.sentpetitions')" :active="request()->routeIs('methodologist.sentpetitions')">
+                        Полученные заявки
+                    </x-nav-link>
                     @elseif (Auth::user()->role === 'department')
-                        <x-nav-link :href="route('department.sentpetitions')" :active="request()->routeIs('department.sentpetitions')">
-                            Полученные заявки
-                        </x-nav-link>
+                    <x-nav-link :href="route('department.sentpetitions')" :active="request()->routeIs('department.sentpetitions')">
+                        Полученные заявки
+                    </x-nav-link>
                     @endif
                 </div>
             </div>
@@ -56,7 +66,7 @@
                             @csrf
 
                             <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
+                                onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Выйти') }}
                             </x-dropdown-link>
@@ -102,7 +112,7 @@
                     @csrf
 
                     <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
+                        onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Выйти') }}
                     </x-responsive-nav-link>
