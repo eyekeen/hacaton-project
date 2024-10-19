@@ -24,4 +24,9 @@ class Petition extends Model
         return $this->belongsTo(Document::class, 'document_id');
     }
 
+
+    public function users() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
 }

@@ -4,17 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Petition;
-use App\Models\Document;
 use Illuminate\Support\Facades\Redirect;
 
-class MethodologistController extends Controller
+class DepartmentController extends Controller
 {
     public function sentpetitions()
     {
         $user = auth()->user()->id;
         $sentpetitions = Petition::where('receiver', $user)->get();
 
-        return view('methodologist.sentpetitions', ['petitions' => $sentpetitions]);
+        return view('dean.sentpetitions', ['petitions' => $sentpetitions]);
     }
 
     public function acceptpetition(Request $request)
@@ -23,12 +22,12 @@ class MethodologistController extends Controller
 
         $petition = Petition::find($p_id);
 
-        $petition->status = 3;
-        $petition->receiver = 8;
+        $petition->status = 5;
+        $petition->receiver = $petition->user_id;
 
         $petition->save();
 
-        return Redirect::to('/methodologist/sentpetitions');
+        return Redirect::to('/dean/sentpetitions');
     }
 
     public function declinepetition(Request $request)
@@ -37,13 +36,11 @@ class MethodologistController extends Controller
 
         $petition = Petition::find($p_id);
 
-        
         $petition->status = 4;
         $petition->receiver = $petition->user_id;
-    
 
         $petition->save();
 
-        return Redirect::to('/methodologist/sentpetitions');
+        return Redirect::to('/dean/sentpetitions');
     }
 }

@@ -4,11 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Document extends Model
+class DocumentCategory extends Model
 {
     protected $fillable = [
-        'document_name',
-        'uri',
-        'document_category_id',
+        'category',
     ];
 }

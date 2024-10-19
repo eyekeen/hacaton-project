@@ -11,14 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('documents', function (Blueprint $table) {
+        Schema::create('document_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('document_name');
-            $table->string('uri');
-            $table->unsignedBigInteger('document_category_id')->nullable()->default(null);
-
-            $table->foreign('document_category_id')->references('document_categories')->on('id');
-
+            $table->string('category');
             $table->timestamps();
         });
     }
@@ -28,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('documents');
+        Schema::dropIfExists('document_categories');
     }
 };

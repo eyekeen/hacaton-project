@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Petition;
 use App\Models\Document;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\DocumentCategory;
 
 class StudentController extends Controller
 {
@@ -13,8 +14,9 @@ class StudentController extends Controller
     {
         $user = auth()->user()->id;
         $mypetitions = Petition::where('user_id', $user)->get();
+        $doc_cat = DocumentCategory::all();
 
-        return view('student.mypetitions', ['petitions' => $mypetitions]);
+        return view('student.mypetitions', ['petitions' => $mypetitions, 'doc_cat' => $doc_cat]);
     }
 
     public function sendpetition()
