@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
+use App\Models\Role;
+
 class AuthenticatedSessionController extends Controller
 {
     /**
@@ -28,7 +30,18 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        $user = auth()->user()->id;
+        $role = Role::where('user_id', $user)->get();
+        $role = $role[0]['role'];
+
+        if($role === 'student'){
+            return redirect()->intended(route('student.dashboard', absolute: false));
+        } else if ($role === 'dean'){
+            return redirect()->intended(route('dean.dashboard', absolute: false));
+        } else {
+            return redirect()->intended(route('department.dashboard', absolute: false));
+        }
+
     }
 
     /**

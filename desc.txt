@@ -1,0 +1,19 @@
+roles:
+    student, admin, dean, department
+
+1. templates
+    1.1. local storage
+
+    1.2. department(role) - done
+    1.3. uri - done
+
+    1.4. online edit template
+
+
+2. submission of applications
+
+3. status checking
+
+4. what i need for submission
+
+5. dashboard (optional)
