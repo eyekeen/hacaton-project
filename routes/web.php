@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DeanController;
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\MethodologistController;
 use App\Http\Controllers\ProfileController;
@@ -53,10 +54,10 @@ Route::middleware(['auth', MethodologistCheck::class])->prefix('methodologist')-
 });
 
 
-Route::middleware(['auth', DepartmentCheck::class])->prefix('dean')->group(function () {
-    Route::get('/sentpetitions', [DeanController::class, 'sentpetitions'])->name('dean.sentpetitions');
-    Route::post('/acceptpetition', [DeanController::class, 'acceptpetition'])->name('dean.acceptpetition');
-    Route::post('/declinepetition', [DeanController::class, 'declinepetition'])->name('dean.declinepetition');
+Route::middleware(['auth', DepartmentCheck::class])->prefix('department')->group(function () {
+    Route::get('/sentpetitions', [DepartmentController::class, 'sentpetitions'])->name('department.sentpetitions');
+    Route::post('/acceptpetition', [DepartmentController::class, 'acceptpetition'])->name('department.acceptpetition');
+    Route::post('/declinepetition', [DepartmentController::class, 'declinepetition'])->name('department.declinepetition');
 });
 
 

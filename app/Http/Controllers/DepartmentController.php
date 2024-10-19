@@ -13,7 +13,7 @@ class DepartmentController extends Controller
         $user = auth()->user()->id;
         $sentpetitions = Petition::where('receiver', $user)->get();
 
-        return view('dean.sentpetitions', ['petitions' => $sentpetitions]);
+        return view('department.sentpetitions', ['petitions' => $sentpetitions]);
     }
 
     public function acceptpetition(Request $request)
@@ -27,7 +27,7 @@ class DepartmentController extends Controller
 
         $petition->save();
 
-        return Redirect::to('/dean/sentpetitions');
+        return Redirect::to('/department/sentpetitions');
     }
 
     public function declinepetition(Request $request)
@@ -41,6 +41,6 @@ class DepartmentController extends Controller
 
         $petition->save();
 
-        return Redirect::to('/dean/sentpetitions');
+        return Redirect::to('/department/sentpetitions');
     }
 }

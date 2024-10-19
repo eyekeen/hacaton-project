@@ -7,6 +7,7 @@ use App\Models\Petition;
 use App\Models\Document;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\DocumentCategory;
+use App\Models\User;
 
 class StudentController extends Controller
 {
@@ -14,19 +15,26 @@ class StudentController extends Controller
     {
         $user = auth()->user()->id;
         $mypetitions = Petition::where('user_id', $user)->get();
-        $doc_cat = DocumentCategory::all();
+        $doc_cats = DocumentCategory::all();
 
-        return view('student.mypetitions', ['petitions' => $mypetitions, 'doc_cat' => $doc_cat]);
+        return view('student.mypetitions', ['petitions' => $mypetitions, 'doc_cats' => $doc_cats]);
     }
 
     public function sendpetition()
     {
         $documents = Document::all();
 
+
+        $methodologist = User::join('roles', 'roles.user_id', '=', 'users.id')
+            ->where('roles.role', 'methodologist')
+            ->select('users.*')
+            ->get();
+
         $user = auth()->user()->id;
 
         return view('student.sendpetition', [
             'documents' => $documents,
+            'methodologist' => $methodologist,
         ]);
     }
 
@@ -39,7 +47,7 @@ class StudentController extends Controller
         $status = 1;
 
         // условно методист
-        $receiver = 7;
+        $receiver = $request->get('methodolog');
 
         $petition = new Petition();
 

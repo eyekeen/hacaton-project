@@ -15,14 +15,14 @@
                     <div>Статус: {{ $petition->statuses->status }}</div>
                     <div>Тип заявки: {{ $petition->documents->document_name }}</div>
                     <div>
-                        <form action="{{ route('dean.acceptpetition') }}" method="POST">
+                        <form action="{{ route('department.acceptpetition') }}" method="POST">
                             @csrf
                             <input type="hidden" name="p_id" value="{{ $petition->id }}">
                             <button class="accept-button dark:bg-green-500 text-white font-bold py-2 px-4 rounded">
                                 Принять
                             </button>
                         </form>
-                        <form action="{{ route('dean.declinepetition') }}" method="POST">
+                        <form action="{{ route('department.declinepetition') }}" method="POST">
                             @csrf
                             <input type="hidden" name="p_id" value="{{ $petition->id }}">
                             <button class="reject-button dark:bg-red-500 text-white font-bold py-2 px-4 rounded">

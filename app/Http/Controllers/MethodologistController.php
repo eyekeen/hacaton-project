@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Petition;
 use App\Models\Document;
+use App\Models\User;
 use Illuminate\Support\Facades\Redirect;
 
 class MethodologistController extends Controller
@@ -24,7 +25,13 @@ class MethodologistController extends Controller
         $petition = Petition::find($p_id);
 
         $petition->status = 3;
-        $petition->receiver = 8;
+
+        $dep = User::join('roles', 'roles.user_id', '=', 'users.id')
+        ->where('roles.role', 'department')
+        ->select('users.*')
+        ->first();
+
+        $petition->receiver = $dep->id;
 
         $petition->save();
 
