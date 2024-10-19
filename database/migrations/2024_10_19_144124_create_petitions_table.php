@@ -16,7 +16,6 @@ return new class extends Migration
             $table->unsignedBigInteger('document_id');
             
             $table->unsignedBigInteger('user_id');
-            $table->dateTime('date_of_sent');
             
             $table->unsignedBigInteger('status');
             $table->unsignedBigInteger('receiver');

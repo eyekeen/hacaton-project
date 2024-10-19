@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\MethodologistController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StudentController;
 use App\Http\Middleware\DeanCheck;
 use App\Http\Middleware\DepartmentCheck;
 use App\Http\Middleware\StudentCheck;
@@ -11,9 +14,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/student/dashboard', function () {
-    return view('student.dashboard');
-})->middleware(['auth', 'verified', StudentCheck::class])->name('student.dashboard');
 
 Route::get('/department/dashboard', function () {
     return view('department.dashboard');
@@ -27,7 +27,8 @@ Route::get('/methodologist/dashboard', function () {
     return view('methodologist.dashboard');
 })->middleware(['auth', 'verified', MethodologistCheck::class])->name('methodologist.dashboard');
 
-
+Route::get('/upload', [DocumentController::class, 'create'])->name('file.upload');
+Route::post('/upload', [DocumentController::class, 'store'])->name('file.upload');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -35,4 +36,21 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+Route::middleware(['auth', StudentCheck::class])->prefix('student')->group(function () {
+
+    Route::get('/mypetitions', [StudentController::class, 'mypetitions'])->name('student.mypetitions');
+
+    Route::get('/sendpetition', [StudentController::class, 'sendpetition'])->name('student.sendpetition');
+
+    Route::post('/sendpetition', [StudentController::class, 'store'])->name('student.sendpetition.store');
+});
+
+
+Route::middleware(['auth', MethodologistCheck::class])->prefix('methodologist')->group(function () {
+    Route::get('/sentpetitions', [MethodologistController::class, 'sentpetitions'])->name('methodologist.sentpetitions');
+    Route::post('/acceptpetition', [MethodologistController::class, 'acceptpetition'])->name('methodologist.acceptpetition');
+    Route::post('/declinepetition', [MethodologistController::class, 'declinepetition'])->name('methodologist.declinepetition');
+});
+
+
+require __DIR__ . '/auth.php';

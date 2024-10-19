@@ -21,16 +21,5 @@ roles:
 
 submission of applications
 
------------------------
-documents
-id
-document_name
-uri
------------------------
-petiions(заявки)
-id
-document_id
-user_id
-data of sent
-status
-------------------------
+
+студент(запрос) - методист(да/нет) - учеб. отдел(подпись, если по кайфу) - студент(ответ)

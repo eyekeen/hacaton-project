@@ -35,13 +35,13 @@ class AuthenticatedSessionController extends Controller
         $role = $role[0]['role'];
 
         if($role === 'student'){
-            return redirect()->intended(route('student.dashboard', absolute: false));
+            return redirect()->intended(route('student.mypetitions', absolute: false));
         } else if ($role === 'dean'){
             return redirect()->intended(route('dean.dashboard', absolute: false));
         } else if ($role === 'department') {
             return redirect()->intended(route('department.dashboard', absolute: false));
         } else if ($role === 'methodologist') {
-            return redirect()->intended(route('methodologist.dashboard', absolute: false));
+            return redirect()->intended(route('methodologist.sentpetitions', absolute: false));
         }
 
     }
