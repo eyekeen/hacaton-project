@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Symfony\Component\HttpFoundation\Response;
 
 class DepartmentCheck
@@ -21,8 +22,10 @@ class DepartmentCheck
 
         if($role[0]['role'] === 'department'){
             return $next($request);
-        } else {
-            return new Response('you are not department');
+        } else if ($role[0]['role'] === 'student') {
+            return Redirect::to('/student/mypetitions');
+        } else if ($role[0]['role'] === 'methodologist') {
+            return Redirect::to('/methodologist/sentpetitions');
         }
     }
 }

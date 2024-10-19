@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            Отпраленные заявки
+            Полученные заявки
         </h2>
     </x-slot>
 
@@ -41,9 +41,19 @@
         @endforeach
         @endisset
 
-        @empty($petitions)
-        <h1 class="text-white">Нету заявок</h1>
-        @endempty
+        !@isset($petitions)
+        <div class="container mx-auto px-4 py-8">
+            <div class="grid grid-cols-2 grid-rows-2 gap-4 py-4 text-white">
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+                    <div class="grid grid-cols-2 grid-rows-2 gap-4">
+                        <div>
+                                Нет заявок
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endisset
 
     </div>
 </x-app-layout>

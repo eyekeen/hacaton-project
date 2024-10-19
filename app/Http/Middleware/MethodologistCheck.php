@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Redirect;
 use App\Models\Role;
 
 class MethodologistCheck
@@ -21,8 +22,10 @@ class MethodologistCheck
 
         if($role[0]['role'] === 'methodologist'){
             return $next($request);
-        } else {
-            return new Response('you are not methodologist');
+        } else if ($role[0]['role'] === 'student') {
+            return Redirect::to('/student/mypetitions');
+        } else if ($role[0]['role'] === 'department') {
+            return Redirect::to('/department/sentpetitions');
         }
     }
 }

@@ -6,6 +6,7 @@ use App\Models\Role;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Redirect;
 
 class StudentCheck
 {
@@ -21,8 +22,10 @@ class StudentCheck
 
         if($role[0]['role'] === 'student'){
             return $next($request);
-        } else {
-            return new Response('you are not student');
+        } else if ($role[0]['role'] === 'methodologist') {
+            return Redirect::to('/methodologist/sentpetitions');
+        } else if ($role[0]['role'] === 'department') {
+            return Redirect::to('/department/sentpetitions');
         }
     }
 }

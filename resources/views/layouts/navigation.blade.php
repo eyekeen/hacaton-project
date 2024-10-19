@@ -12,9 +12,22 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('student.mypetitions')" :active="request()->routeIs('student.mypetitions')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
+                    @if(Auth::user()->role === 'student')
+                        <x-nav-link :href="route('student.mypetitions')" :active="request()->routeIs('student.mypetitions')">
+                            Мои заявки
+                        </x-nav-link>
+                        <x-nav-link :href="route('student.sendpetition')" :active="request()->routeIs('student.sendpetition')">
+                            Отправить заявку
+                        </x-nav-link>
+                    @elseif (Auth::user()->role === 'methodologist')
+                        <x-nav-link :href="route('methodologist.sentpetitions')" :active="request()->routeIs('methodologist.sentpetitions')">
+                            Полученные заявки
+                        </x-nav-link>
+                    @elseif (Auth::user()->role === 'department')
+                        <x-nav-link :href="route('department.sentpetitions')" :active="request()->routeIs('department.sentpetitions')">
+                            Полученные заявки
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -35,7 +48,7 @@
 
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                            {{ __('Профиль') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->
@@ -45,7 +58,7 @@
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ __('Выйти') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
@@ -81,7 +94,7 @@
 
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
+                    {{ __('Профиль') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
@@ -91,7 +104,7 @@
                     <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        {{ __('Выйти') }}
                     </x-responsive-nav-link>
                 </form>
             </div>

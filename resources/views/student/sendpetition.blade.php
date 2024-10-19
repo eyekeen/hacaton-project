@@ -5,31 +5,24 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900 dark:text-gray-100 border">
-                        <a href="{{ route('student.mypetitions')  }}">Мои заявки</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="py-12">
+    <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <form class="max-w-sm mx-auto" method="POST" action="{{ route('student.sendpetition.store') }}">
                         @csrf
-                        <label for="document" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Выберите заявку/справку</label>
+                        <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Выберите отдел</label>
+                        <select name="document" id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="1">Учебный отдел</option>
+                            <option value="2">Отдел кадров</option>
+                        </select>
+                        <label for="document" class="block mt-2 mb-2 text-sm font-medium text-gray-900 dark:text-white">Выберите заявку/справку</label>
                         <select name="document" id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             @foreach($documents as $document)
                             <option value="{{ $document->id }}">{{ $document->document_name }}</option>
                             @endforeach
                         </select>
-                        <label for="methodolog" class="block mt-2 mb-2 text-sm font-medium text-gray-900 dark:text-white">Выберите методиста</label>
+                        <label for="methodolog" class="block mt-2 mb-2 text-sm font-medium text-gray-900 dark:text-white">Выберите получателя</label>
                         <select name="methodolog" id="methodolog" class="bg-gray-50 mt-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             @foreach($methodologist as $methodolog)
                                 <option value="{{ $methodolog->id }}">{{ $methodolog->name }}</option>
