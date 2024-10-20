@@ -29,4 +29,8 @@ class Petition extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function answerDocuments(){
+        return $this->belongsTo(AnswerDocument::class, 'petition_id');
+    }
+
 }

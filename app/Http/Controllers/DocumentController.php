@@ -27,9 +27,7 @@ class DocumentController extends Controller
         // Сохраняем информацию о файле в базу данных
         Document::create([
             'document_name' => $file->getClientOriginalName(),
-            // 'uri' => $storedName,
-            'uri' => $path,
-            // 'path' => $path,
+            'uri' => $storedName,
         ]);
 
         return 'ok';

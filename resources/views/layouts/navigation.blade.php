@@ -5,19 +5,10 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    @if(Auth::user()->role === 'student')
-                        <a href="{{ route('student.mypetitions') }}">
-                            <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
-                        </a>
-                    @elseif (Auth::user()->role === 'methodologist')
-                        <a href="{{ route('methodologist.sentpetitions') }}">
-                            <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
-                        </a>
-                    @elseif (Auth::user()->role === 'department')
-                        <a href="{{ route('department.sentpetitions') }}">
-                            <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
-                        </a>
-                    @endif
+                    <a href="{{ route('student.mypetitions') }}">
+                        <!-- <img src="{{ asset('storage/coco_jumbo.jpeg'); }}" alt=""> -->
+                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                    </a>
                 </div>
 
                 <!-- Navigation Links -->

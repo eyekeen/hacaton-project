@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AnswerDocument;
 use Illuminate\Http\Request;
 use App\Models\Petition;
 use App\Models\Document;
@@ -17,7 +18,13 @@ class StudentController extends Controller
         $mypetitions = Petition::where('user_id', $user)->get();
         $doc_cats = DocumentCategory::all();
 
-        return view('student.mypetitions', ['petitions' => $mypetitions, 'doc_cats' => $doc_cats]);
+        $newdocs = AnswerDocument::join('petitions', 'petitions.id', '=', 'answer_documents.petition_id')
+                                ->where('petitions.user_id', '=', $user)
+                                ->where('petitions.status', '=', 5)
+                                ->select('answer_documents.*')
+                                ->get();
+
+        return view('student.mypetitions', ['petitions' => $mypetitions, 'doc_cats' => $doc_cats, 'newdocs' => $newdocs]);
     }
 
     public function sendpetition()

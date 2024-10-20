@@ -58,6 +58,8 @@ Route::middleware(['auth', DepartmentCheck::class])->prefix('department')->group
     Route::get('/sentpetitions', [DepartmentController::class, 'sentpetitions'])->name('department.sentpetitions');
     Route::post('/acceptpetition', [DepartmentController::class, 'acceptpetition'])->name('department.acceptpetition');
     Route::post('/declinepetition', [DepartmentController::class, 'declinepetition'])->name('department.declinepetition');
+
+    Route::post('/oldmethod', [DepartmentController::class, 'oldmethod'])->name('department.oldmethod');
 });
 
 

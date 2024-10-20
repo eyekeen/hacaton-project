@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Petition;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\AnswerDocument;
+use Illuminate\Support\Facades\Storage;
 
 class DepartmentController extends Controller
 {
@@ -42,5 +44,40 @@ class DepartmentController extends Controller
         $petition->save();
 
         return Redirect::to('/department/sentpetitions');
+    }
+
+    public function oldmethod(Request $request)
+    {
+
+        $user = auth()->user()->id;
+
+        $ansdoc = new AnswerDocument();
+
+        $file = $request->file('newdoc');
+        $originalFileName = $request->file('newdoc')->getClientOriginalName();
+        $p_id = $request->get('p_id');
+        $newFileName = time() . '_' . uniqid() . '.' . pathinfo($originalFileName, PATHINFO_EXTENSION);
+        $filePath = $newFileName;
+
+        $path = Storage::disk('public')->putFileAs('uploads', $file, $newFileName);
+        
+        $ansdoc->original_name = $originalFileName;
+        $ansdoc->path = $filePath;
+        $ansdoc->user_id = $user;
+        $ansdoc->petition_id = $p_id;
+
+        $ansdoc->save();
+
+        $up_p = Petition::where('id', $p_id)->get();
+
+        $p_u_id = $up_p[0]->user_id;
+
+        $up_p[0]->receiver = $p_u_id;
+        $up_p[0]->status = 5;
+
+        $up_p[0]->save();
+
+        return Redirect::to('/department/sentpetitions');
+
     }
 }
