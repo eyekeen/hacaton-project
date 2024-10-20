@@ -15,18 +15,9 @@
                     <div>Статус: {{ $petition->statuses->status }}</div>
                     <div>Тип заявки: {{ $petition->documents->document_name }}</div>
                     <div>
-                        @foreach($newdocs as $newdoc)
-                        @if($petition->status === 5)
-                            Ответ: Заявка одобренна<br />
-                            <a href="/storage/oldmethod/$newdoc->path }}" class="text-decoration-line: underline">Ссылка на отсканированный файл</a><br />
-                            <h5>*Примечание</h5>
-                        @else
-                            Ответ:<br />
-                            <a href="/storage/uploads/{{ $petition->documents->uri }}" class="text-decoration-line: underline">Ссылка на файл с электронной подписью</a><br />
-                            <h5>*Примечание</h5>
-                        @endif
-                        @endforeach
-
+                        Ответ:<br />
+                        <a href="/storage/uploads/{{ $petition->documents->uri }}" class="text-decoration-line: underline">Ссылка на файл с электронной подписью</a><br />
+                        <h5>*Если заявка "Законченной" то вы можете сказать подписанный файл</h5>
                     </div>
                 </div>
             </div>

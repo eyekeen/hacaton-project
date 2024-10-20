@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Petition;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\AnswerDocument;
+use App\Models\Document;
 use Illuminate\Support\Facades\Storage;
 
 class DepartmentController extends Controller
@@ -51,7 +52,6 @@ class DepartmentController extends Controller
 
         $user = auth()->user()->id;
 
-        $ansdoc = new AnswerDocument();
 
         $file = $request->file('newdoc');
         $originalFileName = $request->file('newdoc')->getClientOriginalName();
@@ -61,12 +61,11 @@ class DepartmentController extends Controller
 
         $path = Storage::disk('public')->putFileAs('uploads', $file, $newFileName);
         
-        $ansdoc->original_name = $originalFileName;
-        $ansdoc->path = $filePath;
-        $ansdoc->user_id = $user;
-        $ansdoc->petition_id = $p_id;
+        $ansdoc = Document::create([
+            'document_name' => $originalFileName,
+            'uri' => $newFileName,
+        ]);
 
-        $ansdoc->save();
 
         $up_p = Petition::where('id', $p_id)->get();
 
@@ -74,6 +73,7 @@ class DepartmentController extends Controller
 
         $up_p[0]->receiver = $p_u_id;
         $up_p[0]->status = 5;
+        $up_p[0]->document_id = $ansdoc->id;
 
         $up_p[0]->save();
 
